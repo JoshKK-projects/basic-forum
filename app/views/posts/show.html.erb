@@ -1,0 +1,28 @@
+<h1><%= @post.title%></h1>
+<%= @post.content %>
+<p>Posted by <%= @post.user.first_name + ' ' + @post.user.last_name %> </p>
+
+<%  @post.comments.each do |comment| %>
+	<div class='comments-box'>
+		<h3><%= comment.title %></h3>
+		<p>
+			<%= comment.user.first_name + ' ' + comment.user.last_name	 %>
+		</p>
+	</div>
+	</br>
+<% end %>
+	
+<h2> Comment on post</h2>
+<%= form_for @comment, :url => post_comments_path(@post) do |f| %>
+	<p>
+        <%= f.label :title %><br>
+        <%= f.text_field :title %>
+	</p>
+	<p>
+        <%= f.label :content %><br>
+        <%= f.text_area :content %>
+	</p>
+	<p>
+        <%= f.submit %>
+    </p>
+<% end %>
